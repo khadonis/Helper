@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        /*.swiper-container img {
+            width: 100%;
+        }*/
+
+        .swiper-container-vertical>.swiper-pagination-bullets {
+            left: 20px;
+        }
+
+        .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet {
+            width: 18px;
+            height: 18px;
+            margin: 23px 0;
+            padding: 2px;
+            opacity: 1;
+            position: relative;
+            background: #fff;
+        }
+        .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet-active{
+            background: #000;
+        }
+
+        .swiper-pagination-bullet::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid #fff;
+            position: absolute;
+            display: block;
+            top: -5px;
+            z-index: 9999999;
+            left: -5px;
+            border-radius: 20px;            
+        }
+
+        .res {
+            color: #fff;
+            width: 90px;
+            position: relative;
+            left: 25px;
+            font-weight: 700;
+            display: none;
+            padding-left: 15px;
+        }
+        .res::after{
+            content: '';
+            position:absolute;
+            vertical-align: middle;
+            width: 20px;
+            height:1px;
+            background: #fff;
+            top:50%;
+            left:0;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <img src="images/jordan-whitt-6261.jpg" alt="">
+
+            </div>
+            <div class="swiper-slide">
+                <img src="images/rachael-crowe-49784.jpg" alt="">
+
+            </div>
+            <div class="swiper-slide">
+                <img src="images/jakob-owens-224351.jpg" alt="">
+
+            </div>
+            ...
+        </div>
+
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="container">
+        copntent
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script src="js/swiper.jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var activeClassTxt = '.swiper-pagination-bullet-active .res', bullts = ".swiper-pagination-bullet";
+            function addTxt(sira, txtM) {
+                $(bullts + ':eq(' + (sira - 1) + ')').html('<div class="res">' + txtM + '</div>');
+            }
+            var swiper = new Swiper('.swiper-container', {
+                direction: 'vertical',
+                watchSlidesProgress: true,
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                keyboardControl: true,
+                effect: "fade",
+                speed: 1000,
+                loop: true,
+                autoplay: 3000,
+                queueStartCallbacks: true,
+                onInit: function (swiper) {
+                    setTimeout(function () {
+                        addTxt(1, 'Resim 1');
+                        addTxt(2, 'Resim 2');
+                        addTxt(3, 'Resim 3');
+                        $(activeClassTxt).show();
+                    }, 500);
+                },
+                onAfterResize: function (swiper) {
+                    addTxt(1, 'Resim 1');
+                    addTxt(2, 'Resim 2');
+                    addTxt(3, 'Resim 3');
+                    $(activeClassTxt).show();
+                },
+                onSlideChangeStart: function (swiper) {
+                    $('.res').hide();
+                    $(activeClassTxt).show();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
